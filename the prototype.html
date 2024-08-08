@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("purple.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            border: 10px dashed black;
+            padding: 25px;
+            background-origin: content-box;
+            background-size: cover;
+        }
+        h2 {
+            font-size: 20px;
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-bottom: 2px;
+        }
+        p {
+            font-size: 15px;
+            text-align: center;
+            font-family: cursive;
+            margin-bottom: 3px;
+        }
+        .center {
+            text-align: center;
+        }
+        #canvas {
+            display:block;
+            margin: 20px auto;
+            border-width: 100px;
+            border: 2px solid #fff; /* Add border for better visibility type shit*/
+        }
+    </style>
+</head>
+<body>
+    <h2>Wishing you a Happy Birthday Hauwa</h2>
+    <p>Click to open the surprise</p>
+    <div class="center">
+        <button type="button" onclick="myFunction()">Click Me!</button>
+    </div>
+    
+    <p id="demo" class="center"></p>
+    <canvas id="canvas" width="700" height="500"></canvas>
+
+    <!-- Include the CreateJS library -->
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "pew pew";
+            createTextAnimation();
+        }
+
+        function createTextAnimation() {
+            var canvas = document.getElementById("canvas");
+            var stage = new createjs.Stage(canvas);
+            var maxWidth = canvas.width - 40; // 20px padding on each side
+            var topPadding = 20; // Top padding
+
+            // Create a text object
+            var text = new createjs.Text(
+                "Happy birthday to my friend with benefits. Wishing you lots of joy, laughter and unforgettable moments as you celebrate another birthday! I hope your birthday is as fantastic as you are. I know your biggest wish came true when you met me 'hehehe'. As you turn another year older, I know that God will continue to bless you. Enjoy your special day, sweetheart. Happy birthday!           *With Love, Chubby*",
+                "20px cursive",
+                "purple"
+            );
+            text.textAlign = "center";
+            text.textBaseline = "middle"; // Vertically center text
+            text.lineWidth = canvas.width - 80; // Adjust width to fit canvas
+            text.x = canvas.width / 2;
+            text.y = canvas.height / 2;
+            text.alpha = 0; // Start text invisible
+            stage.addChild(text);
+
+            // Animate the text (e.g., make it fade in)
+            createjs.Tween.get(text)
+                .to({ alpha: 1 }, 1000); // Fade in effect
+
+            // Update the stage to show the text
+            stage.update();
+
+            // Continuously update the stage
+            createjs.Ticker.setFPS(60);
+            createjs.Ticker.addEventListener("tick", function(event) {
+                stage.update(event);
+            });
+        }
+    </script>
+</body>
+</html>
